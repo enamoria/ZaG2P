@@ -27,7 +27,10 @@ The `Elapsed time` varies between runs, still don't know why
     >> hello he lâu
     >> Elapsed time: 0.0081000328064
 
-### Notes
+## Notes
 
 * k, c ambiguity
 * d, j ambiguity
+
+## References
+Read this wonderful blog `https://fehiepsi.github.io/blog/grapheme-to-phoneme/`.
