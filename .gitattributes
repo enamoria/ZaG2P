@@ -1,0 +1,2 @@
+intermediate/g2p_vi/best_model_adagrad_attn.pth filter=lfs diff=lfs merge=lfs -text
+ZaG2P/intermediate/g2p_vi/best_model_adagrad_attn.pth filter=lfs diff=lfs merge=lfs -text
