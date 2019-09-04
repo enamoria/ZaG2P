@@ -1,0 +1,22 @@
+{
+    'vi_data_path': 'tts_dict_prepare/',
+    'en_data_path': 'tts_dict_prepare/',
+    'test_en_data_path': 'tts_dict_prepare/',
+    'Hieu_data': 'tts_dict_prepare/Hieu',
+    'epochs': 15,
+    'batch_size': 100,
+    'max_len': 20,  # max length of grapheme/phoneme sequences
+    'beam_size': 10,  # size of beam for beam-search
+    'd_embed': 500,  # embedding dimension
+    'd_hidden': 500,  # hidden dimension
+    'attention': True,  # use attention or not
+    'log_every': 10,  # number of iterations to log and validate training
+    'lr': 0.007,  # initial learning rate
+    'lr_decay': 0.5,  # decay lr when not observing improvement in val_loss
+    'lr_min': 1e-5,  # stop when lr is too low
+    'n_bad_loss': 5,  # number of bad val_loss before decaying
+    'clip': 2.3,  # clip gradient, to avoid exploding gradient
+    'cuda': True,  # using gpu or not
+    'seed': 5,  # initial seed
+    'intermediate_path': 'intermediate/g2p_vi/',  # path to save models
+}

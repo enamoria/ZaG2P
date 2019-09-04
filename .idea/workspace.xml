@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="35372496-c953-4b80-a99e-05262c086dba" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/ZaG2P.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/DictClass.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/ZaG2P.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/ZaG2P.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/ZaG2P_syllables.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/ZaG2P_vi.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/api.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/config.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/config.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/constant.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/index.ipynb" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/intermediate/g2p_vi/best_model_adagrad_attn.pth" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/intermediate/g2p_vi/gp_fields.pkl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/test_G2P.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/test_G2P1.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/test_vi.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/.flake8" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/.github/ISSUE_TEMPLATE/bug_report.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/.github/ISSUE_TEMPLATE/documentation.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/.github/ISSUE_TEMPLATE/feature_request.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/.github/ISSUE_TEMPLATE/questions_help_support.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/.travis.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/README.rst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/build_tools/travis/after_success.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/build_tools/travis/install.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/build_tools/travis/test_script.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/codecov.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/docs/Makefile" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/docs/make.bat" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/docs/source/_static/css/pytorch_theme.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/docs/source/_static/img/pytorch-logo-dark.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/docs/source/_static/img/pytorch-logo-dark.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/docs/source/_static/img/pytorch-logo-flame.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/docs/source/_static/img/pytorch-logo-flame.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/docs/source/conf.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/docs/source/data.rst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/docs/source/datasets.rst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/docs/source/examples.rst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/docs/source/index.rst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/docs/source/utils.rst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/docs/source/vocab.rst" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/pytest.ini" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/readthedocs.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/setup.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/test/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/test/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/test/babi.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/test/common/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/test/common/test_markers.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/test/common/torchtext_test_case.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/test/conftest.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/test/data.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/test/data/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/test/data/test_batch.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/test/data/test_builtin_datasets.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/test/data/test_dataset.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/test/data/test_field.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/test/data/test_pipeline.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/test/data/test_subword.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/test/data/test_utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/test/imdb.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/test/language_modeling.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/test/nli.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/test/sequence_tagging.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/test/sst.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/test/test_vocab.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/test/translation.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/test/trec.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/torchtext/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/torchtext/data/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/torchtext/data/batch.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/torchtext/data/dataset.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/torchtext/data/example.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/torchtext/data/field.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/torchtext/data/iterator.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/torchtext/data/pipeline.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/torchtext/data/utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/torchtext/datasets/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/torchtext/datasets/babi.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/torchtext/datasets/imdb.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/torchtext/datasets/language_modeling.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/torchtext/datasets/nli.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/torchtext/datasets/sequence_tagging.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/torchtext/datasets/sst.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/torchtext/datasets/translation.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/torchtext/datasets/trec.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/torchtext/utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/text1/torchtext/vocab.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/zz_demo_anh_Bao.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ZaG2P/zz_linhtinh.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/setup.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ZaG2P/text1/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/ZaG2P/text1/.gitignore" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1OX2Vk9xq34SOacJ0ccG2gOw1q8" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/tts_dict_prepare/Hieu" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.build" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/ZaG2P" />
+      <recent name="$PROJECT_DIR$/tts_dict_prepare/Hieu" />
+      <recent name="$PROJECT_DIR$/pyG2P" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/tts_dict_prepare/Hieu" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Python.api">
+    <configuration name="ZaG2P_vi" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="ZaG2P" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ZaG2P/ZaG2P_vi.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="api" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="ZaG2P" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ZaG2P/api.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="constant" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="ZaG2P" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="/data/PycharmProjects/ZaG2P/ZaG2P" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="/data/PycharmProjects/ZaG2P/ZaG2P/constant.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="test_vi" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="ZaG2P" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ZaG2P/test_vi.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="zz_demo_anh_Bao" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="ZaG2P" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ZaG2P/zz_demo_anh_Bao.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.ZaG2P_vi" />
+      <item itemvalue="Python.test_vi" />
+      <item itemvalue="Python.zz_demo_anh_Bao" />
+      <item itemvalue="Python.constant" />
+      <item itemvalue="Python.api" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.api" />
+        <item itemvalue="Python.test_vi" />
+        <item itemvalue="Python.constant" />
+        <item itemvalue="Python.zz_demo_anh_Bao" />
+        <item itemvalue="Python.ZaG2P_vi" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="35372496-c953-4b80-a99e-05262c086dba" name="Default Changelist" comment="" />
+      <created>1563868975824</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1563868975824</updated>
+      <workItem from="1563868976871" duration="6225000" />
+      <workItem from="1563880823703" duration="2281000" />
+      <workItem from="1563933271216" duration="13857000" />
+      <workItem from="1564022677133" duration="497000" />
+      <workItem from="1564023227147" duration="1844000" />
+      <workItem from="1564109651505" duration="4858000" />
+      <workItem from="1564398931230" duration="4705000" />
+      <workItem from="1564541251051" duration="9597000" />
+      <workItem from="1564627398102" duration="6848000" />
+      <workItem from="1564716777511" duration="6433000" />
+      <workItem from="1565065970868" duration="14000" />
+      <workItem from="1565078765917" duration="1228000" />
+      <workItem from="1565083019165" duration="5084000" />
+      <workItem from="1565695860446" duration="2298000" />
+      <workItem from="1565748094343" duration="14207000" />
+      <workItem from="1565838560859" duration="12778000" />
+      <workItem from="1565926153544" duration="20425000" />
+      <workItem from="1566190032303" duration="2862000" />
+      <workItem from="1566198929051" duration="15162000" />
+      <workItem from="1566267814072" duration="2154000" />
+      <workItem from="1566293902139" duration="2611000" />
+      <workItem from="1566357552118" duration="16996000" />
+      <workItem from="1566468566813" duration="5214000" />
+      <workItem from="1566528037416" duration="4562000" />
+      <workItem from="1566532610053" duration="6934000" />
+      <workItem from="1566874351611" duration="1094000" />
+      <workItem from="1566877664868" duration="8306000" />
+      <workItem from="1566962977117" duration="2682000" />
+      <workItem from="1566979959698" duration="384000" />
+      <workItem from="1567478279925" duration="1904000" />
+      <workItem from="1567500355356" duration="2701000" />
+      <workItem from="1567564953276" duration="4981000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ZaG2P/ZaG2P.py</url>
+          <line>179</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ZaG2P/test_vi.py</url>
+          <line>70</line>
+          <option name="timeStamp" value="31" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ZaG2P/ZaG2P_vi.py</url>
+          <line>259</line>
+          <option name="timeStamp" value="38" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ZaG2P/ZaG2P_syllables.py</url>
+          <line>115</line>
+          <option name="timeStamp" value="46" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ZaG2P/ZaG2P_syllables.py</url>
+          <line>240</line>
+          <option name="timeStamp" value="47" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ZaG2P/ZaG2P_vi.py</url>
+          <line>129</line>
+          <option name="timeStamp" value="50" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ZaG2P/ZaG2P_vi.py</url>
+          <line>155</line>
+          <option name="timeStamp" value="51" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ZaG2P/test_vi.py</url>
+          <line>104</line>
+          <option name="timeStamp" value="67" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ZaG2P/utils.py</url>
+          <line>62</line>
+          <option name="timeStamp" value="73" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ZaG2P/zz_demo_anh_Bao.py</url>
+          <line>188</line>
+          <option name="timeStamp" value="82" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ZaG2P/ZaG2P_vi.py</url>
+          <line>207</line>
+          <option name="timeStamp" value="86" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ZaG2P/DictClass.py</url>
+          <line>65</line>
+          <option name="timeStamp" value="90" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ZaG2P/ZaG2P_vi.py</url>
+          <line>235</line>
+          <option name="timeStamp" value="93" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="PythonConfigurationType">
+        <watch expression="os.path.abspath(&quot;config.yml&quot;)" language="Python" />
+        <watch expression="os.path.realpath(&quot;config.yml&quot;)" language="Python" />
+        <watch expression="os.path.normpath(&quot;config.yml&quot;)" language="Python" />
+        <watch expression="os.path.defpath" language="Python" />
+        <watch expression="os.path.isfile(os.path.abspath(&quot;config.yml&quot;))" language="Python" />
+        <watch expression="os.path.isfile(&quot;/home/enamoria/PycharmProjects/ZaG2P/ZaG2P/config.yml&quot;)" language="Python" />
+        <watch expression="len(test_iter)" language="Python" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/ZaG2P$ZaG2P.coverage" NAME="ZaG2P Coverage Results" MODIFIED="1563954184356" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
+    <SUITE FILE_PATH="coverage/ZaG2P$constant.coverage" NAME="constant Coverage Results" MODIFIED="1567566007304" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="/data/PycharmProjects/ZaG2P/ZaG2P" />
+    <SUITE FILE_PATH="coverage/ZaG2P$api.coverage" NAME="api Coverage Results" MODIFIED="1567570473524" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/ZaG2P$pytest_in_ZaG2P_vi_py.coverage" NAME="pytest in ZaG2P_vi.py Coverage Results" MODIFIED="1566894554345" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/ZaG2P$test_vi.coverage" NAME="test_vi Coverage Results" MODIFIED="1567567698366" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/ZaG2P$ZaG2P_syllables.coverage" NAME="ZaG2P_syllables Coverage Results" MODIFIED="1566186778792" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/ZaG2P$ZaG2P_vi.coverage" NAME="ZaG2P_vi Coverage Results" MODIFIED="1567478404682" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/ZaG2P$pytest_in_test_vi_py.coverage" NAME="pytest in test_vi.py Coverage Results" MODIFIED="1565083070506" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/ZaG2P$zz_demo_anh_Bao.coverage" NAME="zz_demo_anh_Bao Coverage Results" MODIFIED="1567478407928" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/ZaG2P$pytest_in_ZaG2P_syllables_py.coverage" NAME="pytest in ZaG2P_syllables.py Coverage Results" MODIFIED="1566181600248" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/ZaG2P$pytest_in_ZaG2P_py.coverage" NAME="pytest in ZaG2P.py Coverage Results" MODIFIED="1563872064848" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ZaG2P" />
+    <SUITE FILE_PATH="coverage/ZaG2P$pytest_in_ZaG2P_vi_py__1_.coverage" NAME="pytest in ZaG2P_vi.py Coverage Results" MODIFIED="1565840680327" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+</project>
