@@ -1,1 +1,3 @@
 include ZaG2P/config.yml
+include ZaG2P/intermediate/g2p_vi/best_model_adagrad_attn.pth
+include ZaG2P/intermediate/g2p_vi/gp_fields.pkl
