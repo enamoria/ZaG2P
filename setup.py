@@ -8,17 +8,17 @@
 from setuptools import setup
 
 setup(
-    name="pyEval",
+    name="ZaG2P",
     version="0.0.1",
     author="ngunhuconchocon",
     description="Convert non-Vietnamese word to Vietnamese phonemes/syllables",
     # license="BSD",
     # url="https://github.com/enamoria/ZaG2P",
     install_requires=[
-          'Levenshtein', 'torch>=1.1.0', 'torchtext>=0.3.1'
+          'Levenshtein @ git+https://github.com/ztane/python-Levenshtein#egg=Levenshtein', 'torch>=1.1.0', 'torchtext>=0.3.1'
       ],
     dependency_links=[
-        "git+https://github.com/ztane/python-Levenshtein#egg=Levenshtein"
+
     ],
     packages=['ZaG2P'],
     include_package_data=True
