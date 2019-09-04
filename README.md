@@ -1,6 +1,11 @@
 ## ZaG2P
 Convert non-Vietnamese word to Vietnamese phonemes/syllables
 
+## Requirements
+* `python 2.7`
+* `torch >= 1.1.0`
+* `torchtext >= 0.3.1`
+
 ## Usage
 
 ### Install
