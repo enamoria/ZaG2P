@@ -21,17 +21,6 @@ import Levenshtein  # https://github.com/ztane/python-Levenshtein/
 from utils import uncombine_phonemes_tone, map_phone_to_unvoice
 from constant import parser, project_root
 
-parser['intermediate_path'] = 'intermediate/g2p_vi/'  # path to save models
-parser['beam_size'] = 30  # size of beam for beam-search
-parser['d_embed'] = 1000  # embedding dimension
-parser['d_hidden'] = 1000  # hidden dimension
-parser['epochs'] = 15
-parser['max_len'] = 30  # max length of grapheme/phoneme sequences
-parser['lr'] = 0.01
-parser['lr_min'] = 1e-5
-
-args = argparse.Namespace(**parser)
-config = args
 tone_of_unvoiced_phoneme = "6"
 
 
@@ -72,7 +61,15 @@ def convert_from_phonemes_to_syllables(batch, model, vietdict):
     return " ".join(syllables)
 
 
-def load_model(fields_path, model_path, dict_path):
+def load_model():
+    # parser['intermediate_path'] = 'intermediate/g2p_vi/'  # path to save models
+    args = argparse.Namespace(**parser)
+    config = args
+
+    fields_path = os.path.join(project_root, os.path.join(config.intermediate_path, "gp_fields.pkl"))
+    model_path = os.path.join(project_root, os.path.join(config.intermediate_path, "best_model_adagrad_attn.pth"))
+    dict_path = os.path.join(project_root, "tts_dict_prepare/vn.dict")
+
     with open(fields_path, "rb") as f:
         fields = pickle.load(f)
         g_field, p_field, config = fields['g_field'], fields['p_field'], fields['config']
@@ -117,11 +114,7 @@ def G2S(word, model_and_fields, vietdict, use_cuda=True):
 
 
 if __name__ == "__main__":
-    fields_path = os.path.join(project_root, os.path.join(config.intermediate_path, "gp_fields.pkl"))
-    model_path = os.path.join(project_root, os.path.join(config.intermediate_path, "best_model_adagrad_attn.pth"))
-    dict_path = os.path.join(project_root, "tts_dict_prepare/vn.dict")
-
-    model, vietdict = load_model(fields_path=fields_path, model_path=model_path, dict_path=dict_path)
+    model, vietdict = load_model()  # fields_path=fields_path, model_path=model_path, dict_path=dict_path)
 
     start = time.time()
     G2S("fuck", model, vietdict)
