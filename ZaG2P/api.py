@@ -61,14 +61,17 @@ def convert_from_phonemes_to_syllables(batch, model, vietdict):
     return " ".join(syllables)
 
 
-def load_model():
+def load_model(fields_path=None, model_path=None, dict_path=None):
     # parser['intermediate_path'] = 'intermediate/g2p_vi/'  # path to save models
     args = argparse.Namespace(**parser)
     config = args
 
-    fields_path = os.path.join(project_root, os.path.join(config.intermediate_path, "gp_fields.pkl"))
-    model_path = os.path.join(project_root, os.path.join(config.intermediate_path, "best_model_adagrad_attn.pth"))
-    dict_path = os.path.join(project_root, "tts_dict_prepare/vn.dict")
+    if not fields_path:
+        fields_path = os.path.join(project_root, os.path.join(config.intermediate_path, "gp_fields.pkl"))
+    if not model_path:
+        model_path = os.path.join(project_root, os.path.join(config.intermediate_path, "best_model_adagrad_attn.pth"))
+    if not dict_path:
+        dict_path = os.path.join(project_root, "tts_dict_prepare/vn.dict")
 
     with open(fields_path, "rb") as f:
         fields = pickle.load(f)
