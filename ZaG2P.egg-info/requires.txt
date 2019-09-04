@@ -1,0 +1,3 @@
+python-Levenshtein@ git+https://github.com/ztane/python-Levenshtein
+torch>=1.1.0
+torchtext>=0.3.1

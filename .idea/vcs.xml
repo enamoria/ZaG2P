@@ -2,9 +2,6 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/ZaG2P/text" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/ZaG2P/text1" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/pyG2P/text" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/text" vcs="Git" />
   </component>
 </project>
