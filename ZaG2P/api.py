@@ -6,8 +6,8 @@
 """
 from __future__ import print_function, division, absolute_import
 
-from DictClass import CMUDict, VNDict
-from models import G2P
+from .DictClass import CMUDict, VNDict
+from .models import G2P
 import argparse
 import dill as pickle
 
@@ -19,8 +19,8 @@ import torch.nn as nn
 import torch.optim as optim
 import torchtext.data as data
 import Levenshtein  # https://github.com/ztane/python-Levenshtein/
-from utils import uncombine_phonemes_tone, map_phone_to_unvoice
-from constant import parser, project_root
+from .utils import uncombine_phonemes_tone, map_phone_to_unvoice
+from .constant import parser, project_root
 
 tone_of_unvoiced_phoneme = "6"
 

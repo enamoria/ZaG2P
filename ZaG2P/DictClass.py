@@ -5,9 +5,11 @@
     @brief: Пролетарии всех стран, соединяйтесь!
 """
 
+from __future__ import print_function, division, absolute_import
+
 import torchtext.data as data
 import random
-import constant
+from . import constant
 
 
 # Demo on Cargie Merlon dataset
