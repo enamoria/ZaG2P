@@ -4,6 +4,7 @@
     @author: ngunhuconchocon
     @brief: Пролетарии всех стран, соединяйтесь! да здравствует наша советская родина
 """
+from __future__ import print_function, division, absolute_import
 
 from DictClass import CMUDict, VNDict
 from models import G2P
