@@ -63,8 +63,20 @@ def load_model(fields_path=None, model_path=None, dict_path=None):
     args = argparse.Namespace(**parser)
     config = args
 
+    g_field = data.Field(init_token='<s>', tokenize=(lambda x: list(x.split()[0])[::-1]))
+    p_field = data.Field(init_token='<os>', eos_token='</os>',
+                         tokenize=(lambda x: x.split()))
+
+    filepath = os.path.join(project_root, os.path.join("/home/enamoria/PycharmProjects/ZaG2P/ZaG2P/tts_dict_prepare", 'oov.vn.dict'))
+    train_data, val_data, test_data, all_data = VNDict.splits(filepath, g_field, p_field, 1234)
+
+    g_field.build_vocab(train_data, val_data, test_data)
+    p_field.build_vocab(train_data, val_data, test_data)
+
     if not fields_path:
+        # We have to manually redeclare fields, or the code will only runnable in python 3.7
         fields_path = os.path.join(project_root, os.path.join(config.intermediate_path, "gp_fields.pkl"))
+        
     if not model_path:
         model_path = os.path.join(project_root, os.path.join(config.intermediate_path, "best_model_adagrad_attn.pth"))
     if not dict_path:
@@ -72,7 +84,8 @@ def load_model(fields_path=None, model_path=None, dict_path=None):
 
     with open(fields_path, "rb") as f:
         fields = pickle.load(f)
-        g_field, p_field, config = fields['g_field'], fields['p_field'], fields['config']
+        # g_field, p_field, config = fields['g_field'], fields['p_field'], fields['config']
+        _, _, config = fields['g_field'], fields['p_field'], fields['config']
 
     model = G2P(config)
     model.load_state_dict(torch.load(model_path))
@@ -114,7 +127,7 @@ def G2S(word, model_and_fields, vietdict, use_cuda=True):
 
 
 if __name__ == "__main__":
-    model, vietdict = load_model()  # fields_path=fields_path, model_path=model_path, dict_path=dict_path)
+    model, vietdict = load_model()
 
     start = time.time()
     G2S("tivi", model, vietdict)
