@@ -16,7 +16,7 @@ Convert non-Vietnamese word to Vietnamese phonemes/syllables
 The `Elapsed time` varies between runs, still don't know why
 
     from ZaG2P.api import load_model, G2S  # Grapheme to syllables
-    model, vietdict = load_model(fields_path, model_path, dict_path)  # fields_path and dict_path are optional, model_path is required
+    model, vietdict = load_model()
 
     start = time.time()
     G2S("hello", model, vietdict)
