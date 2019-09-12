@@ -6,21 +6,18 @@
 """
 from __future__ import print_function, division, absolute_import
 
-from .DictClass import CMUDict, VNDict
-from .models import G2P
 import argparse
-import dill as pickle
-
-import pdb
-import time
 import os
+import time
+
+import dill as pickle
 import torch
-import torch.nn as nn
-import torch.optim as optim
 import torchtext.data as data
-import Levenshtein  # https://github.com/ztane/python-Levenshtein/
-from .utils import uncombine_phonemes_tone, map_phone_to_unvoice
-from .constant import parser, project_root
+
+from .DictClass import VNDict
+from .constant import parser, project_root, nucleuses
+from .models import G2P
+from .utils import uncombine_phonemes_tone
 
 tone_of_unvoiced_phoneme = "6"
 
@@ -44,8 +41,8 @@ def read_dict(dictpath):
 
 def convert_from_phonemes_to_syllables(batch, model, vietdict):
     p_field = batch.dataset.fields['phoneme']
-    prediction = model(batch.grapheme).data.tolist()[:-1]
-
+    prediction = model(batch.grapheme).tolist()[:-1]
+    print(time.time())
     phonemes = ' '.join([p_field.vocab.itos[p] for p in prediction])
     uncombined_phonemes = uncombine_phonemes_tone(phonemes, None)
 
@@ -63,7 +60,6 @@ def convert_from_phonemes_to_syllables(batch, model, vietdict):
 
 
 def load_model(fields_path=None, model_path=None, dict_path=None):
-    # parser['intermediate_path'] = 'intermediate/g2p_vi/'  # path to save models
     args = argparse.Namespace(**parser)
     config = args
 
@@ -121,5 +117,5 @@ if __name__ == "__main__":
     model, vietdict = load_model()  # fields_path=fields_path, model_path=model_path, dict_path=dict_path)
 
     start = time.time()
-    G2S("fuck", model, vietdict)
+    G2S("tivi", model, vietdict)
     print("Elapsed time: {}".format(time.time() - start))
