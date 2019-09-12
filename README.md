@@ -9,9 +9,7 @@ Convert non-Vietnamese word to Vietnamese phonemes/syllables
 ## Usage
 
 ### Install
-`pip install https://github.com/enamoria/ZaG2P/zipball/master --verbose`
-
-Download model from `https://drive.google.com/open?id=1liYQWBkN1uVAnguH6Bhsve4ptUQd_Myo`
+`pip install https://github.com/enamoria/ZaG2P/zipball/py3 --verbose`
 
 ### Example
 
