@@ -126,12 +126,12 @@ def G2S(word, model_and_fields, vietdict, use_cuda=True):
 
         return results
     except:
-        return word
+        return word.split(" ")[0]
 
 
 if __name__ == "__main__":
     model, vietdict = load_model()
 
     start = time.time()
-    G2S("tivi", model, vietdict)
+    print(G2S("tivi", model, vietdict))
     print("Elapsed time: {}".format(time.time() - start))
