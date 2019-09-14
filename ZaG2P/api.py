@@ -67,7 +67,8 @@ def load_model(fields_path=None, model_path=None, dict_path=None):
     p_field = data.Field(init_token='<os>', eos_token='</os>',
                          tokenize=(lambda x: x.split()))
 
-    filepath = os.path.join(project_root, os.path.join("/home/enamoria/PycharmProjects/ZaG2P/ZaG2P/tts_dict_prepare", 'oov.vn.dict'))
+    filepath = os.path.join(project_root, os.path.join("tts_dict_prepare", 'oov.vn.dict'))
+    # print(filepath)
     train_data, val_data, test_data, all_data = VNDict.splits(filepath, g_field, p_field, 1234)
 
     g_field.build_vocab(train_data, val_data, test_data)
@@ -122,7 +123,7 @@ def G2S(word, model_and_fields, vietdict, use_cuda=True):
             grapheme = batch.grapheme.squeeze(1).data.tolist()[1:][::-1]
             grapheme = ''.join([g_field.vocab.itos[g] for g in grapheme])
             results.append("{} {}".format(grapheme, convert_from_phonemes_to_syllables(batch, model, vietdict)))
-            print(results[-1])
+            # print(results[-1])
 
         return results
     except:
