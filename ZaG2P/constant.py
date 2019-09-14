@@ -11,6 +11,8 @@ project_root = os.path.abspath(os.path.dirname(__file__))
 coda_nucleus_and_semivowel = ['iz', 'pc', 'nz', 'tc', 'ngz', 'kc', 'uz', 'mz', 'aa', 'ee', 'ea', 'oa', 'aw', 'ie', 'uo', 'a', 'wa', 'oo', 'e', 'i',
                               'o', 'u', 'ow', 'uw', 'w']
 
+nucleuses = ['o', 'oa', 'oo', 'u', 'a', 'aa', 'aw', 'ow', 'uw', 'ie', 'uo', 'wa', 'e', 'ea', 'ee', 'i']
+
 tone_for_unvoiced_sound = "6"
 # This is for 8tone dictionary
 # coda_nucleus_and_semivowel = ['ngmz', 'ie', 'uo', 'nhz', 'tz', 'pau', 'pz', 'nz', 'aX', 'WX', 'ngz', 'E', 'jz', 'OX', 'O', 'EX', 'W', 'wz', 'kcz', 'a', 'e', 'i', 'o', 'MW', 'u', 'w', 'kz', 'z', 'kpz', 'mz']
