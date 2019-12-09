@@ -44,7 +44,6 @@ def read_dict(dictpath):
 def predict(batch, model):
     p_field = batch.dataset.fields['phoneme']
     prediction = model(batch.grapheme).tolist()[:-1]
-    print(time.time())
     phonemes = ' '.join([p_field.vocab.itos[p] for p in prediction])
     uncombined_phonemes = uncombine_phonemes_tone(phonemes, None)
 
@@ -82,7 +81,6 @@ def load_model(fields_path=None, model_path=None, dict_path=None):
                          tokenize=(lambda x: x.split()))
 
     filepath = os.path.join(project_root, os.path.join("tts_dict_prepare", 'oov.vn.dict'))
-    # print(filepath)
     train_data, val_data, test_data, all_data = VNDict.splits(filepath, g_field, p_field, 1234)
 
     g_field.build_vocab(train_data, val_data, test_data)
