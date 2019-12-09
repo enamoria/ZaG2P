@@ -14,6 +14,8 @@ import dill as pickle
 import torch
 import torchtext.data as data
 
+from codecs import open
+
 from .DictClass import VNDict
 from .constant import parser, project_root, nucleuses
 from .models import G2P
@@ -29,7 +31,7 @@ def read_dict(dictpath):
     :return:
     """
     vietdict = {'6 b': '(bờ)', '6 k': '(cờ)', '6 tr': '(chờ)', '6 d': '(dờ)', '6 dd': '(đờ)', '6 g': '(gờ)', '6 l': '(lờ)', '6 m': '(mờ)', '6 n': '(nờ)', '6 p': '(pờ)', '6 ph': '(phờ)', '6 r': '(rờ)', '6 s': '(xờ)', '6 t': '(tờ)', '6 th': '(thờ)', '6 v': '(vờ'}
-    with open(dictpath, "r") as f:
+    with open(dictpath, "r", encoding="utf8") as f:
         for line in f.readlines():
             if line and line.strip() and line[0] != "#":
                 temp = line.strip().split(" ")
@@ -154,6 +156,6 @@ if __name__ == "__main__":
 
     start = time.time()
     print(G2S("tivi", model, vietdict))
-    print(G2S("tivi", model, vietdict, return_phoneme=True))
+    print(G2S("manchester", model, vietdict, return_phoneme=True))
 
     print("Elapsed time: {}".format(time.time() - start))
