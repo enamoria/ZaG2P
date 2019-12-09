@@ -139,7 +139,7 @@ def G2S(word, model_and_fields, vietdict, use_cuda=True, return_phoneme=False):
             for batch in test_iter:
                 grapheme = batch.grapheme.squeeze(1).data.tolist()[1:][::-1]
                 grapheme = ''.join([g_field.vocab.itos[g] for g in grapheme])
-                results.append("{} {}".format(grapheme, predict(batch, model)))
+                results.append("{} {}".format(grapheme, " ".join(predict(batch, model))))
         else:
             for batch in test_iter:
                 grapheme = batch.grapheme.squeeze(1).data.tolist()[1:][::-1]
