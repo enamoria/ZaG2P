@@ -21,7 +21,12 @@ from .constant import parser, project_root, nucleuses
 from .models import G2P
 from .utils import uncombine_phonemes_tone
 
-tone_of_unvoiced_phoneme = "6"
+UNVOICE_SOUND = "6"
+nucleus = ["aa", "ee", "ea", "oa", "aw", "ie", "uo", "a", "wa", "oo", "e", "i", "o", "u", "ow", "uw", "w", ""]
+coda = ["iz", "pc", "nz", "tc", "ngz", "kc", "uz", "mz"]
+
+# Unvoiced sound
+unvoiced_sound = ["b", "c", "ch", "đ", "g", "k", "p", "x", "s", "t", "f"]
 
 
 def read_dict(dictpath):
@@ -72,6 +77,24 @@ def convert_from_phonemes_to_syllables(batch, model, vietdict):
     return " ".join(syllables)
 
 
+def combine_phoneme_and_tone(phonemes_and_tone):
+    # phonemes, tone = phonemes_and_tone[1:], phonemes_and_tone[0]
+    prev_pos = 0
+    current_tone = phonemes_and_tone[0]
+    phonemes = []
+    for i, item in enumerate(phonemes_and_tone[1:]):
+        if item.isdigit():
+            prev_pos = i
+            current_tone = item
+        else:
+            if item in nucleus or current_tone == UNVOICE_SOUND:
+                phonemes.append(item + current_tone)
+            else:
+                phonemes.append(item)
+
+    return phonemes
+
+
 def load_model(fields_path=None, model_path=None, dict_path=None):
     args = argparse.Namespace(**parser)
     config = args
@@ -110,9 +133,10 @@ def load_model(fields_path=None, model_path=None, dict_path=None):
     return (g_field, p_field, model), vietdict
 
 
-def G2S(word, model_and_fields, vietdict, use_cuda=True, return_phoneme=False):
+def G2S(word, model_and_fields, vietdict, use_cuda=True, return_phoneme=False, combine_tone_phone=True):
     """
         Convert grapheme to syllables
+    :param combine_tone_phone: Whether to combine tone with phoneme. Only be taken in to account if return_phoneme = True
     :param return_phoneme: if true, return list of phoneme
     :param word: string
     :param model_and_fields: model, getting from load_model(). Note that this contain g_field, p_field, and g2p model
@@ -137,7 +161,11 @@ def G2S(word, model_and_fields, vietdict, use_cuda=True, return_phoneme=False):
             for batch in test_iter:
                 grapheme = batch.grapheme.squeeze(1).data.tolist()[1:][::-1]
                 grapheme = ''.join([g_field.vocab.itos[g] for g in grapheme])
-                results.append("{} {}".format(grapheme, " ".join(predict(batch, model))))
+
+                if combine_tone_phone:
+                    results.append("{} {}".format(grapheme, " ".join(combine_phoneme_and_tone(predict(batch, model)))))
+                else:
+                    results.append("{} {}".format(grapheme, " ".join(predict(batch, model))))
         else:
             for batch in test_iter:
                 grapheme = batch.grapheme.squeeze(1).data.tolist()[1:][::-1]
@@ -145,7 +173,7 @@ def G2S(word, model_and_fields, vietdict, use_cuda=True, return_phoneme=False):
                 results.append("{} {}".format(grapheme, convert_from_phonemes_to_syllables(batch, model, vietdict)))
 
         return results
-    except:
+    except Exception as e:
         return word.split(" ")[0]
 
 
@@ -153,7 +181,7 @@ if __name__ == "__main__":
     model, vietdict = load_model()
 
     start = time.time()
-    print(G2S("tivi", model, vietdict))
-    print(G2S("manchester", model, vietdict, return_phoneme=True))
+    # print(G2S("tivi", model, vietdict))
+    print(G2S("manchester", model, vietdict, return_phoneme=True, combine_tone_phone=True))
 
     print("Elapsed time: {}".format(time.time() - start))
