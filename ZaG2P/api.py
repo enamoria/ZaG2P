@@ -39,12 +39,24 @@ def read_dict(dictpath):
     return vietdict
 
 
-def convert_from_phonemes_to_syllables(batch, model, vietdict):
+def predict(batch, model):
     p_field = batch.dataset.fields['phoneme']
     prediction = model(batch.grapheme).tolist()[:-1]
     print(time.time())
     phonemes = ' '.join([p_field.vocab.itos[p] for p in prediction])
     uncombined_phonemes = uncombine_phonemes_tone(phonemes, None)
+
+    return uncombined_phonemes
+
+
+def convert_from_phonemes_to_syllables(batch, model, vietdict):
+    # p_field = batch.dataset.fields['phoneme']
+    # prediction = model(batch.grapheme).tolist()[:-1]
+    # print(time.time())
+    # phonemes = ' '.join([p_field.vocab.itos[p] for p in prediction])
+    # uncombined_phonemes = uncombine_phonemes_tone(phonemes, None)
+
+    uncombined_phonemes = predict(batch, model)
 
     prev = 0
     syllables = []
@@ -98,9 +110,10 @@ def load_model(fields_path=None, model_path=None, dict_path=None):
     return (g_field, p_field, model), vietdict
 
 
-def G2S(word, model_and_fields, vietdict, use_cuda=True):
+def G2S(word, model_and_fields, vietdict, use_cuda=True, return_phoneme=False):
     """
         Convert grapheme to syllables
+    :param return_phoneme: if true, return list of phoneme
     :param word: string
     :param model_and_fields: model, getting from load_model(). Note that this contain g_field, p_field, and g2p model
     :param vietdict: vn.dict :D
@@ -119,11 +132,17 @@ def G2S(word, model_and_fields, vietdict, use_cuda=True):
                                   train=False, shuffle=True, device=device)
 
         results = []
-        for batch in test_iter:
-            grapheme = batch.grapheme.squeeze(1).data.tolist()[1:][::-1]
-            grapheme = ''.join([g_field.vocab.itos[g] for g in grapheme])
-            results.append("{} {}".format(grapheme, convert_from_phonemes_to_syllables(batch, model, vietdict)))
-            # print(results[-1])
+
+        if return_phoneme:
+            for batch in test_iter:
+                grapheme = batch.grapheme.squeeze(1).data.tolist()[1:][::-1]
+                grapheme = ''.join([g_field.vocab.itos[g] for g in grapheme])
+                results.append("{} {}".format(grapheme, predict(batch, model)))
+        else:
+            for batch in test_iter:
+                grapheme = batch.grapheme.squeeze(1).data.tolist()[1:][::-1]
+                grapheme = ''.join([g_field.vocab.itos[g] for g in grapheme])
+                results.append("{} {}".format(grapheme, convert_from_phonemes_to_syllables(batch, model, vietdict)))
 
         return results
     except:
@@ -135,4 +154,6 @@ if __name__ == "__main__":
 
     start = time.time()
     print(G2S("tivi", model, vietdict))
+    print(G2S("tivi", model, vietdict, return_phoneme=True))
+
     print("Elapsed time: {}".format(time.time() - start))
