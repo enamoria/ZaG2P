@@ -103,8 +103,8 @@ def load_model(fields_path=None, model_path=None, dict_path=None):
     p_field = data.Field(init_token='<os>', eos_token='</os>',
                          tokenize=(lambda x: x.split()))
 
-    filepath = os.path.join(project_root, os.path.join("tts_dict_prepare", 'oov.vn.dict'))
-    train_data, val_data, test_data, all_data = VNDict.splits(filepath, g_field, p_field, 1234)
+    filepath = os.path.join(project_root, os.path.join("tts_dict_prepare", 'oov_syllable_new_type_1'))
+    train_data, val_data, test_data, combined_data, all_data = VNDict.splits(filepath, g_field, p_field, 1234)
 
     g_field.build_vocab(train_data, val_data, test_data)
     p_field.build_vocab(train_data, val_data, test_data)
@@ -149,7 +149,7 @@ def G2S(word, model_and_fields, vietdict, use_cuda=True, return_phoneme=False, c
         if use_cuda:
             if torch.cuda.is_available():
                 device = "cuda"
-        word = word + " x x x"
+        word = word + " xxxxx"
         g_field, p_field, model = model_and_fields
         test_data = VNDict([word], g_field, p_field)
         test_iter = data.Iterator(test_data, batch_size=1,
@@ -182,6 +182,6 @@ if __name__ == "__main__":
 
     start = time.time()
     # print(G2S("tivi", model, vietdict))
-    print(G2S("manchester", model, vietdict, return_phoneme=True, combine_tone_phone=True))
+    print(G2S("zalo", model, vietdict, return_phoneme=True, combine_tone_phone=True))
 
     print("Elapsed time: {}".format(time.time() - start))

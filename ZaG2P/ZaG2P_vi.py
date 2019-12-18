@@ -35,9 +35,9 @@ logging.basicConfig(level=logging.DEBUG)
 
 parser['intermediate_path'] = 'intermediate/g2p_vi/'  # path to save models
 parser['beam_size'] = 10  # size of beam for beam-search
-parser['d_embed'] = 400  # embedding dimension
-parser['d_hidden'] = 400  # hidden dimension
-parser['epochs'] = 25
+parser['d_embed'] = 350  # embedding dimension
+parser['d_hidden'] = 350  # hidden dimension
+parser['epochs'] = 10
 parser['max_len'] = 10  # max length of grapheme/phoneme sequences
 parser['lr'] = 0.01
 parser['lr_min'] = 1e-5
@@ -65,7 +65,7 @@ def phoneme_error_rate(p_seq1, p_seq2, batch):
     # return Levenshtein.distance(''.join(c_seq1), ''.join(c_seq2)) / len(c_seq2)
     try:
         return Levenshtein.distance(' '.join([p_field.vocab.itos[p] for p in p_seq1]),
-                                    ' '.joine([p_field.vocab.itos[p] for p in p_seq2])) / float(len(p_seq2))
+                                    ' '.join([p_field.vocab.itos[p] for p in p_seq2])) / float(len(p_seq2))
     except Exception as e:
         return 0.99
         pdb.set_trace()
@@ -81,8 +81,6 @@ def train(config, train_iter, model, criterion, optimizer, epoch, test_iter=None
     global init, best_val_loss, stop
 
     print("=> EPOCH {}".format(epoch))
-    if epoch == 10:
-        print("xxx")
 
     train_iter.init_epoch()
     for batch in train_iter:
@@ -252,8 +250,8 @@ if __name__ == "__main__":
         criterion.cuda()
     optimizer = optim.Adagrad(model.parameters(), lr=config.lr)  # use Adagrad
 
-    test(test_iter, model, criterion)
-    test_iter.init_epoch()
+    # test(test_iter, model, criterion)
+    # test_iter.init_epoch()
 
     if 1 == 1:  # change to True to train
         iteration = n_total = train_loss = n_bad_loss = 0
@@ -261,6 +259,9 @@ if __name__ == "__main__":
         best_val_loss = 10
         init = time.time()
         for epoch in range(1, config.epochs + 1):
+            if epoch == 15:
+                # pdb.set_trace()
+                print(1)
             train(config, train_iter, model, criterion, optimizer, epoch, test_iter)
             if stop:
                 break
@@ -273,17 +274,24 @@ if __name__ == "__main__":
                                        train=False, shuffle=True, device=device)
 
     count_correct = 0
-    with open(os.path.join(project_root, "test_G2P.csv"), "w") as ff:
-        for i, batch in enumerate(test_on_train_iter):
-            count_correct += show(batch, model, ff)
-            # if i == 10:
-            #     break
-    print(f"{count_correct}/{len(test_on_train_iter)}")
 
-    count_correct = 0
-    for i, batch in enumerate(test_iter):
-        count_correct += show(batch, model)
-    print(f"{count_correct}/{len(test_iter)}")
+    filepath = os.path.join(project_root, f"logs/output_{parser['d_embed']}_{parser['d_hidden']}_epoch{parser['epochs']}_lrdecay{parser['lr_decay']}")
+    os.system(f"mkdir -p " + os.path.join(project_root + "logs"))
+
+    with open(filepath, "wb") as f_out:
+        with open(os.path.join(project_root, "test_train_G2P.csv"), "w") as ff:
+            for i, batch in enumerate(test_on_train_iter):
+                count_correct += show(batch, model, ff)
+
+        print(f"{count_correct}/{len(test_on_train_iter)}")
+        f_out.write(f"{count_correct}/{len(test_on_train_iter)}\n".encode("utf8"))
+
+        count_correct = 0
+        with open(os.path.join(project_root, "test_test_G2P.csv"), "w") as ff:
+            for i, batch in enumerate(test_iter):
+                count_correct += show(batch, model, ff)
+            print(f"{count_correct}/{len(test_iter)}")
+        f_out.write(f"{count_correct}/{len(test_iter)}".encode("utf8"))
 
     logging.info("Done at {}".format(datetime.now().strftime("%Y-%m-%d %H:%M")))
 
