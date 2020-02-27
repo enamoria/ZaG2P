@@ -9,8 +9,9 @@ from setuptools import setup
 
 setup(
     name="ZaG2P",
-    version="0.0.1",
+    version="1.0.0",
     author="ngunhuconchocon",
+    author_email="phanhuykinh@gmail.com",
     description="Convert non-Vietnamese word to Vietnamese phonemes/syllables",
     # license="BSD",
     url="https://github.com/enamoria/ZaG2P",
