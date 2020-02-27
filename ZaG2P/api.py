@@ -19,7 +19,7 @@ from codecs import open
 from .DictClass import VNDict
 from .constant import parser, project_root
 from .models import G2P
-from .utils import uncombine_phonemes_tone, uncombine_phonemes_tone_with_space
+from .utils import read_dict, uncombine_phonemes_tone_with_space
 
 UNVOICE_SOUND = "6"
 nucleus = ["aa", "ee", "ea", "oa", "aw", "ie", "uo", "a", "wa", "oo", "e", "i", "o", "u", "ow", "uw", "w", ""]
@@ -29,21 +29,21 @@ coda = ["iz", "pc", "nz", "tc", "ngz", "kc", "uz", "mz"]
 unvoiced_sound = ["b", "c", "ch", "đ", "g", "k", "p", "x", "s", "t", "f"]
 
 
-def read_dict(dictpath):
-    """
-        this dict is different: dict[phoneme] = word, like dict['5 d i t'] = địt
-    :param dictpath:
-    :return:
-    """
-    vietdict = {'6 b': '(bờ)', '6 k': '(cờ)', '6 tr': '(chờ)', '6 d': '(dờ)', '6 dd': '(đờ)', '6 g': '(gờ)', '6 l': '(lờ)', '6 m': '(mờ)', '6 n': '(nờ)', '6 p': '(pờ)', '6 ph': '(phờ)', '6 r': '(rờ)', '6 s': '(xờ)', '6 t': '(tờ)', '6 th': '(thờ)', '6 v': '(vờ'}
-    with open(dictpath, "r", encoding="utf8") as f:
-        for line in f.readlines():
-            if line and line.strip() and line[0] != "#":
-                temp = line.strip().split(" ")
-                word, phonemes = temp[0], temp[1:]
-
-                vietdict[" ".join(phonemes)] = word
-    return vietdict
+# def read_dict(dictpath):
+#     """
+#         this dict is different: dict[phoneme] = word, like dict['5 d i t'] = địt
+#     :param dictpath:
+#     :return:
+#     """
+#     vietdict = {'6 b': '(bờ)', '6 k': '(cờ)', '6 tr': '(chờ)', '6 d': '(dờ)', '6 dd': '(đờ)', '6 g': '(gờ)', '6 l': '(lờ)', '6 m': '(mờ)', '6 n': '(nờ)', '6 p': '(pờ)', '6 ph': '(phờ)', '6 r': '(rờ)', '6 s': '(xờ)', '6 t': '(tờ)', '6 th': '(thờ)', '6 v': '(vờ'}
+#     with open(dictpath, "r", encoding="utf8") as f:
+#         for line in f.readlines():
+#             if line and line.strip() and line[0] != "#":
+#                 temp = line.strip().split(" ")
+#                 word, phonemes = temp[0], temp[1:]
+#
+#                 vietdict[" ".join(phonemes)] = word
+#     return vietdict
 
 
 def predict(batch, model):
@@ -175,7 +175,11 @@ if __name__ == "__main__":
     model, vietdict = load_model()
 
     start = time.time()
-    # print(G2S("tivi", model, vietdict))
-    print(G2S("zalo", model, vietdict, return_phoneme=True, combine_tone_phone=True))
+    print(G2S("software", model, vietdict))
+    print(G2S("developing", model, vietdict))
+    print(G2S("seasoning", model, vietdict))
+    print(G2S("versioning", model, vietdict))
+    print(G2S("zika", model, vietdict))
+    print(G2S("zalo", model, vietdict, return_phoneme=False))
 
     print("Elapsed time: {}".format(time.time() - start))
