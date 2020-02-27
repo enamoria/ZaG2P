@@ -19,16 +19,23 @@ class Encoder(nn.Module):
         super(Encoder, self).__init__()
         self.embedding = nn.Embedding(vocab_size, d_embed)
         self.lstm = nn.LSTMCell(d_embed, d_hidden)
+        # self.lstm = nn.LSTM(d_embed, d_hidden)
         self.d_hidden = d_hidden
+
+        self.vocab_size = vocab_size
 
     def forward(self, x_seq, cuda=False):
         o = []
         e_seq = self.embedding(x_seq)  # seq x batch x dim
         tt = torch.cuda if cuda else torch  # use cuda tensor or not
         # create initial hidden state and initial cell state
+        # h = Variable(tt.FloatTensor(1, e_seq.size(1), self.d_hidden).zero_())
+        # c = Variable(tt.FloatTensor(1, e_seq.size(1), self.d_hidden).zero_())
         h = Variable(tt.FloatTensor(e_seq.size(1), self.d_hidden).zero_())
         c = Variable(tt.FloatTensor(e_seq.size(1), self.d_hidden).zero_())
 
+        # o, (h, c) = self.lstm(e_seq, (h, c))
+        # return o, h, c
         for e in e_seq.chunk(e_seq.size(0), 0):
             e = e.squeeze(0)
             h, c = self.lstm(e, (h, c))
@@ -66,6 +73,9 @@ class Attention(nn.Module):
     def __init__(self, dim):
         super(Attention, self).__init__()
         self.linear = nn.Linear(dim * 2, dim, bias=False)
+        # self.linear = nn.Linear(dim, dim, bias=False)
+
+        self.dropout = nn.Dropout(p=0.0)
 
     def forward(self, x, context=None):
         if context is None:
@@ -74,7 +84,7 @@ class Attention(nn.Module):
         assert x.size(1) == context.size(2)  # context: batch x seq x dim
         attn = F.softmax(context.bmm(x.unsqueeze(2)).squeeze(2))
         weighted_context = attn.unsqueeze(1).bmm(context).squeeze(1)
-        o = self.linear(torch.cat((x, weighted_context), 1))
+        o = self.linear(self.dropout(torch.cat((x, weighted_context), 1)))
         return torch.tanh(o)
 
 
@@ -84,18 +94,21 @@ class Decoder(nn.Module):
         super(Decoder, self).__init__()
         self.embedding = nn.Embedding(vocab_size, d_embed)
         self.lstm = nn.LSTMCell(d_embed, d_hidden)
+        self.lstm1 = nn.LSTMCell(d_hidden, d_hidden)
         self.attn = Attention(d_hidden)
         self.linear = nn.Linear(d_hidden, vocab_size)
+        self.dropout = nn.Dropout(p=0.1)
 
-    def forward(self, x_seq, h, c, context=None):
+    def forward(self, x_seq, h, c, context=None, return_attn=None):
         o = []
         e_seq = self.embedding(x_seq)
         for e in e_seq.chunk(e_seq.size(0), 0):
             e = e.squeeze(0)
             h, c = self.lstm(e, (h, c))
+            h, c = self.lstm1(h, (h, c))
             o.append(self.attn(h, context))
         o = torch.stack(o, 0)
-        o = self.linear(o.view(-1, h.size(1)))
+        o = self.linear(self.dropout(o.view(-1, h.size(1))))
         return F.log_softmax(o).view(x_seq.size(0), -1, o.size(1)), h, c
 
 
@@ -124,7 +137,8 @@ class G2P(nn.Module):
         # Make a beam_size batch.
         h = h.expand(beam.size, h.size(1))
         c = c.expand(beam.size, c.size(1))
-        context = context.expand(beam.size, context.size(1), context.size(2))
+        if context is not None:
+            context = context.expand(beam.size, context.size(1), context.size(2))
 
         for i in range(self.config.max_len):  # max_len = 20
             x = beam.get_current_state()

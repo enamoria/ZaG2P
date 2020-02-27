@@ -3,6 +3,8 @@
 """ Created on 10:16 AM, 8/15/19
     @author: ngunhuconchocon
     @brief: Пролетарии всех стран, соединяйтесь! да здравствует наша советская родина
+
+    Note: this implementation is optimized for north dialect. For Middle and South dialects, please design another dictionary
 """
 
 from __future__ import print_function, division, absolute_import
@@ -13,6 +15,7 @@ import dill as pickle
 import argparse
 import os
 import time
+import re
 
 import torch
 import torch.nn as nn
@@ -21,6 +24,7 @@ import torchtext.data as data
 
 # Based on https://github.com/SeanNaren/deepspeech.pytorch/blob/master/decoder.py.
 import Levenshtein  # https://github.com/ztane/python-Levenshtein/
+import textdistance
 
 from .DictClass import VNDict
 from .models import G2P
@@ -35,22 +39,26 @@ logging.basicConfig(level=logging.DEBUG)
 
 parser['intermediate_path'] = 'intermediate/g2p_vi/'  # path to save models
 parser['beam_size'] = 10  # size of beam for beam-search
+# parser['d_embed'] = 350  # embedding dimension
+# parser['d_hidden'] = 350  # hidden dimension
 parser['d_embed'] = 350  # embedding dimension
 parser['d_hidden'] = 350  # hidden dimension
-parser['epochs'] = 10
-parser['max_len'] = 10  # max length of grapheme/phoneme sequences
+parser['epochs'] = 8
+parser['max_len'] = 20  # max length of grapheme/phoneme sequences
 parser['lr'] = 0.01
 parser['lr_min'] = 1e-5
 
 args = argparse.Namespace(**parser)
 args.cuda = args.cuda and torch.cuda.is_available()
+pattern = r"[0-9]"
+remove_tone = False
 
 torch.manual_seed(args.seed)
 if args.cuda:
     torch.cuda.manual_seed(args.seed)
 
 
-def phoneme_error_rate(p_seq1, p_seq2, batch):
+def phoneme_error_rate(p_seq1, p_seq2, batch, remove_tone):
     _g_field = batch.dataset.fields['grapheme']
     _p_field = batch.dataset.fields['phoneme']
 
@@ -59,16 +67,25 @@ def phoneme_error_rate(p_seq1, p_seq2, batch):
     c_seq1 = [chr(p2c[p]) for p in p_seq1]
     c_seq2 = [chr(p2c[p]) for p in p_seq2]
 
-    # print(' '.join([p_field.vocab.itos[p] for p in p_seq1]),
-    #       ' '.join([p_field.vocab.itos[p] for p in p_seq2]))
-
-    # return Levenshtein.distance(''.join(c_seq1), ''.join(c_seq2)) / len(c_seq2)
     try:
-        return Levenshtein.distance(' '.join([p_field.vocab.itos[p] for p in p_seq1]),
-                                    ' '.join([p_field.vocab.itos[p] for p in p_seq2])) / float(len(p_seq2))
+        pred = ' '.join([p_field.vocab.itos[p] for p in p_seq1])
+        target = ' '.join([p_field.vocab.itos[p] for p in p_seq2])
+
+        if remove_tone:
+            pred = re.sub(pattern, "", pred)
+            target = re.sub(pattern, "", target)
+
+        pred = re.sub(r" +", " ", pred.replace("space", "")).strip()
+        pred = re.sub(r" +", " ", pred.replace("<pad>", "")).strip()
+        target = re.sub(r" +", " ", target.replace("space", "")).strip()
+
+        # return Levenshtein.distance(pred, target)  # / float(len(p_seq2))
+        # print(f"pred\t{pred}\ntarget\t{target}")
+        return textdistance.levenshtein.distance(pred.split(" "), target.split(" "))
+
     except Exception as e:
-        return 0.99
         pdb.set_trace()
+        return 0.99
 
 
 def adjust_learning_rate(optimizer, lr_decay):
@@ -117,6 +134,7 @@ def train(config, train_iter, model, criterion, optimizer, epoch, test_iter=None
                 best_val_loss = val_loss
                 n_bad_loss = 0
                 torch.save(model.state_dict(), config.best_model)
+                # torch.save(model, "/home/enamoria/Desktop/dkm.pth")
             else:
                 n_bad_loss += 1
 
@@ -130,8 +148,8 @@ def train(config, train_iter, model, criterion, optimizer, epoch, test_iter=None
                     stop = True
                     break
 
-    if epoch % 3 == 0 and epoch > 5 and test_iter:
-        test(test_iter, model, criterion)
+    if epoch % 1 == 0 and epoch > 0 and test_iter:
+        test(test_iter, model, criterion, remove_tone=remove_tone)
 
 
 def validate(val_iter, model, criterion):
@@ -147,7 +165,7 @@ def validate(val_iter, model, criterion):
     return val_loss / len(val_iter.dataset)
 
 
-def test(test_iter, model, criterion):
+def test(test_iter, model, criterion, remove_tone):
     model.eval()
     test_iter.init_epoch()
     test_per = test_wer = 0
@@ -157,18 +175,18 @@ def test(test_iter, model, criterion):
         output = model(batch.grapheme).data.tolist()
         target = batch.phoneme[1:].squeeze(1).data.tolist()
         # calculate per, wer here
-        per = phoneme_error_rate(output, target, batch)
+        per = phoneme_error_rate(output, target, batch, remove_tone)
         wer = int(output != target)
         test_per += per  # batch_size = 1
         test_wer += wer
 
-    test_per = test_per / len(test_iter.dataset) * 100
-    test_wer = test_wer / len(test_iter.dataset) * 100
+    test_per = test_per / len(test_iter.dataset)  # * 100
+    test_wer = test_wer / len(test_iter.dataset)  * 100
     print("Phoneme error rate (PER): {:.2f}\nWord error rate (WER): {:.2f}"
           .format(test_per, test_wer))
 
 
-def show(batch, model, f=None):
+def show(batch, model, f=None, remove_tone=False):
     assert batch.batch_size == 1
     g_field = batch.dataset.fields['grapheme']
     p_field = batch.dataset.fields['phoneme']
@@ -179,6 +197,11 @@ def show(batch, model, f=None):
     ground_truth_grapheme = ''.join([g_field.vocab.itos[g] for g in grapheme])
     ground_truth_phoneme = ' '.join([p_field.vocab.itos[p] for p in phoneme])
     prediction = ' '.join([p_field.vocab.itos[p] for p in prediction])
+
+    if remove_tone:
+        ground_truth_grapheme = re.sub(pattern, "", ground_truth_grapheme)
+        ground_truth_phoneme = re.sub(pattern, "", ground_truth_phoneme)
+        prediction = re.sub(pattern, "", prediction)
 
     if ground_truth_phoneme != prediction:
         if f:
@@ -195,6 +218,8 @@ def show(batch, model, f=None):
 
 
 if __name__ == "__main__":
+    start = time.time()
+
     global plotter
     plotter = utils.VisdomLinePlotter(env_name='ZaG2P vietnamese phonemes')
 
@@ -207,9 +232,10 @@ if __name__ == "__main__":
 
     # filepath = os.path.join(args.data_path, 'vn.dict')
     # filepath = os.path.join(args.vi_data_path, 'oov.vn.dict_g2p_1_4')
-    # filepath = os.path.join(project_root, os.path.join(args.vi_data_path, 'oov.vn.dict'))
-    filepath = os.path.join(project_root, os.path.join(args.vi_data_path, 'oov_syllable_new_type_1'))
-    train_data, val_data, test_data, combined_data, all_data = VNDict.splits(filepath, g_field, p_field, args.seed)
+    # filepath = os.path.join(project_root, os.path.join(args.vi_data_path, 'oov.vn.dict'))  phoneme từ đầu
+    filepath = os.path.join(project_root, "/data/Dropbox/linhtinhproject/zdoccano/g2p_final/g2p_data")  # g2p raw data
+    # filepath = os.path.join(project_root, os.path.join(args.vi_data_path, 'oov_syllable_new_type_1'))
+    train_data, val_data, test_data, combined_data, all_data, total_phoneme = VNDict.splits(filepath, g_field, p_field, args.seed, 0)
 
     g_field.build_vocab(train_data, val_data, test_data)
     p_field.build_vocab(train_data, val_data, test_data)
@@ -230,6 +256,8 @@ if __name__ == "__main__":
     config.p_size = len(p_field.vocab)
 
     print(config.g_size, config.p_size)
+    print(f"Total phoneme: {total_phoneme} over {len(all_data)} word. {total_phoneme/len(all_data)} phonemes/word on average")
+
     config.best_model = os.path.join(project_root, os.path.join(config.intermediate_path, "best_model_adagrad_attn.pth"))
 
     if not os.path.isdir(config.intermediate_path):
@@ -245,6 +273,21 @@ if __name__ == "__main__":
 
     model = G2P(config)
     criterion = nn.NLLLoss()
+
+    print(os.path.join(project_root, "testset"))
+    with open(os.path.join(project_root, "testset"), "w") as ftest:
+        for i, batch in enumerate(test_iter):
+            g_field = batch.dataset.fields['grapheme']
+            p_field = batch.dataset.fields['phoneme']
+            grapheme = batch.grapheme.squeeze(1).data.tolist()[1:][::-1]
+            phoneme = batch.phoneme.squeeze(1).data.tolist()[1:-1]
+
+            ground_truth_grapheme = ''.join([g_field.vocab.itos[g] for g in grapheme])
+            ground_truth_phoneme = ' '.join([p_field.vocab.itos[p] for p in phoneme])
+
+            # ftest.write(u"> {}\n= {}\n\n".format(ground_truth_grapheme, ground_truth_phoneme))
+            ftest.write(f"{ground_truth_grapheme} {ground_truth_phoneme}\n")
+
     if config.cuda:
         model.cuda()
         criterion.cuda()
@@ -267,7 +310,7 @@ if __name__ == "__main__":
                 break
 
     model.load_state_dict(torch.load(config.best_model))
-    test(test_iter, model, criterion)
+    test(test_iter, model, criterion, remove_tone=remove_tone)
     test_iter.init_epoch()
 
     test_on_train_iter = data.Iterator(combined_data, batch_size=1,
@@ -281,7 +324,7 @@ if __name__ == "__main__":
     with open(filepath, "wb") as f_out:
         with open(os.path.join(project_root, "test_train_G2P.csv"), "w") as ff:
             for i, batch in enumerate(test_on_train_iter):
-                count_correct += show(batch, model, ff)
+                count_correct += show(batch, model, ff, remove_tone=remove_tone)
 
         print(f"{count_correct}/{len(test_on_train_iter)}")
         f_out.write(f"{count_correct}/{len(test_on_train_iter)}\n".encode("utf8"))
@@ -289,10 +332,14 @@ if __name__ == "__main__":
         count_correct = 0
         with open(os.path.join(project_root, "test_test_G2P.csv"), "w") as ff:
             for i, batch in enumerate(test_iter):
-                count_correct += show(batch, model, ff)
+                count_correct += show(batch, model, ff, remove_tone=remove_tone)
+            ff.write(f"{count_correct}/{len(test_iter)}")
             print(f"{count_correct}/{len(test_iter)}")
+
         f_out.write(f"{count_correct}/{len(test_iter)}".encode("utf8"))
 
+    print(f"Total phoneme: {total_phoneme} over {len(all_data)} word. {total_phoneme/len(all_data)} phonemes/word on average")
+    print(f"Elapsed time: {time.time() - start}")
     logging.info("Done at {}".format(datetime.now().strftime("%Y-%m-%d %H:%M")))
 
 # Wayne Rooney và Cristiano Ronaldo đều là những tên tuổi lớvín đã từng thi đấu cho Manchester United. Hiện tại, Ronaldo đang thi đấu tại Series A,
