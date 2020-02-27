@@ -17,9 +17,9 @@ import torchtext.data as data
 from codecs import open
 
 from .DictClass import VNDict
-from .constant import parser, project_root, nucleuses
+from .constant import parser, project_root
 from .models import G2P
-from .utils import uncombine_phonemes_tone
+from .utils import uncombine_phonemes_tone, uncombine_phonemes_tone_with_space
 
 UNVOICE_SOUND = "6"
 nucleus = ["aa", "ee", "ea", "oa", "aw", "ie", "uo", "a", "wa", "oo", "e", "i", "o", "u", "ow", "uw", "w", ""]
@@ -50,18 +50,12 @@ def predict(batch, model):
     p_field = batch.dataset.fields['phoneme']
     prediction = model(batch.grapheme).tolist()[:-1]
     phonemes = ' '.join([p_field.vocab.itos[p] for p in prediction])
-    uncombined_phonemes = uncombine_phonemes_tone(phonemes, None)
-
+    # uncombined_phonemes = uncombine_phonemes_tone(phonemes, None)
+    uncombined_phonemes = uncombine_phonemes_tone_with_space(phonemes, None)
     return uncombined_phonemes
 
 
 def convert_from_phonemes_to_syllables(batch, model, vietdict):
-    # p_field = batch.dataset.fields['phoneme']
-    # prediction = model(batch.grapheme).tolist()[:-1]
-    # print(time.time())
-    # phonemes = ' '.join([p_field.vocab.itos[p] for p in prediction])
-    # uncombined_phonemes = uncombine_phonemes_tone(phonemes, None)
-
     uncombined_phonemes = predict(batch, model)
 
     prev = 0
@@ -99,15 +93,15 @@ def load_model(fields_path=None, model_path=None, dict_path=None):
     args = argparse.Namespace(**parser)
     config = args
 
-    g_field = data.Field(init_token='<s>', tokenize=(lambda x: list(x.split()[0])[::-1]))
-    p_field = data.Field(init_token='<os>', eos_token='</os>',
-                         tokenize=(lambda x: x.split()))
-
-    filepath = os.path.join(project_root, os.path.join("tts_dict_prepare", 'oov_syllable_new_type_1'))
-    train_data, val_data, test_data, combined_data, all_data = VNDict.splits(filepath, g_field, p_field, 1234)
-
-    g_field.build_vocab(train_data, val_data, test_data)
-    p_field.build_vocab(train_data, val_data, test_data)
+    # g_field = data.Field(init_token='<s>', tokenize=(lambda x: list(x.split()[0])[::-1]))
+    # p_field = data.Field(init_token='<os>', eos_token='</os>',
+    #                      tokenize=(lambda x: x.split()))
+    #
+    # filepath = os.path.join(project_root, os.path.join("tts_dict_prepare", 'oov_syllable_new_type_1'))
+    # train_data, val_data, test_data, combined_data, all_data, _ = VNDict.splits(filepath, g_field, p_field, 1234)
+    #
+    # g_field.build_vocab(train_data, val_data, test_data)
+    # p_field.build_vocab(train_data, val_data, test_data)
 
     if not fields_path:
         # We have to manually redeclare fields, or the code will only runnable in python 3.7
@@ -120,8 +114,8 @@ def load_model(fields_path=None, model_path=None, dict_path=None):
 
     with open(fields_path, "rb") as f:
         fields = pickle.load(f)
-        # g_field, p_field, config = fields['g_field'], fields['p_field'], fields['config']
-        _, _, config = fields['g_field'], fields['p_field'], fields['config']
+        g_field, p_field, config = fields['g_field'], fields['p_field'], fields['config']
+        # _, _, config = fields['g_field'], fields['p_field'], fields['config']
 
     model = G2P(config)
     model.load_state_dict(torch.load(model_path))
