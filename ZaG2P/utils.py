@@ -119,15 +119,16 @@ def read_dict(dictpath):
                 temp = line.strip().split(" ")
                 word, phonemes = temp[0], temp[1:]
 
-                if "kồ" in line:
-                    print(1)
+                # if "gia" in line:
+                #     print(1)
 
                 phonemes_string = " ".join(phonemes)
                 if phonemes_string not in vietdict:
                     vietdict[phonemes_string] = word
                 elif (len(vietdict[phonemes_string]) < len(word) or "ing" not in word or word[0] == "x") and \
                         not (phonemes_string[-1] == "i" and word[-1] == "y") and \
-                        not (word[0] == "k" and phonemes_string[1] not in "eéèẹẽẻêếềệễểiíìịĩỉyýỳỵỹỷ"):
+                        not (word[0] == "k" and phonemes_string[1] not in "eéèẹẽẻêếềệễểiíìịĩỉyýỳỵỹỷ") and \
+                        not (word[0] == 'g' and word [1] == 'i'):
                     vietdict[phonemes_string] = word
 
     return vietdict
