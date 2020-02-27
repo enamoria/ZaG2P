@@ -1,19 +1,19 @@
+### This branch is being under developed
+
 ## ZaG2P
 Convert non-Vietnamese word to Vietnamese phonemes/syllables
 
 ## Requirements
-* `python 2.7`
+* `python 3.7`. python 3.6 will encounter unknown opcode error. Something related to pass a lambda function as argument. Fuck knows. idc
 * `torch == 1.1.0`
 * `torchtext == 0.3.1`
 
 ## Usage
 
 ### Install
-`pip install https://github.com/enamoria/ZaG2P/zipball/py3 --verbose`
+`pip install https://github.com/enamoria/ZaG2P/zipball/paper_version --verbose`
 
 ### Example
-
-The `Elapsed time` varies between runs, still don't know why
 
     from ZaG2P.api import load_model, G2S  # Grapheme to syllables
     model, vietdict = load_model()
