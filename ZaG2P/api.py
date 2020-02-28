@@ -119,7 +119,7 @@ def load_model(fields_path=None, model_path=None, dict_path=None):
 
     model = G2P(config)
     model.load_state_dict(torch.load(model_path))
-
+    model.eval()
     if config.cuda:
         model.cuda()
 
@@ -175,11 +175,14 @@ if __name__ == "__main__":
     model, vietdict = load_model()
 
     start = time.time()
-    print(G2S("software", model, vietdict))
-    print(G2S("developing", model, vietdict))
-    print(G2S("seasoning", model, vietdict))
-    print(G2S("versioning", model, vietdict))
-    print(G2S("zika", model, vietdict))
-    print(G2S("zalo", model, vietdict, return_phoneme=False))
+    # print(G2S("software", model, vietdict))
+    # print(G2S("developing", model, vietdict))
+    # print(G2S("seasoning", model, vietdict))
+    # print(G2S("versioning", model, vietdict))
+    # print(G2S("zika", model, vietdict))
+    # print(G2S("zalo", model, vietdict, return_phoneme=False))
+
+    for _ in range(100):
+        print(G2S("leganes", model, vietdict))
 
     print("Elapsed time: {}".format(time.time() - start))
