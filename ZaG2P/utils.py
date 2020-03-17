@@ -117,19 +117,14 @@ def read_dict(dictpath):
             if line and line.strip() and line[0] != "#":
                 # Có nghĩa là có trong từ điển và được chấp nhận là 1 từ tiếng Việt, không phải chỉ đơn giản là ghép phụ âm đầu và vần.
                 # Ví dụ: đỵt phát âm giống địt nhưng sẽ không được coi là một từ tiếng Việt
-                is_real_vietnamese = True
-
-                if "notavailable" in line:
-                    is_real_vietnamese = False  # In new dict, words which are not originally in Vietnamese dictionary are noted as "notavailable"
+                # is_real_vietnamese = True
+                #
+                # if "notavailable" in line:
+                #     is_real_vietnamese = False  # In new dict, words which are not originally in Vietnamese dictionary are noted as "notavailable"
 
                 line = line.strip().replace("notavailable", "").replace("completelynotavailable", "")
                 temp = line.strip().split(" ")
                 word, phonemes = temp[0], temp[1:]
-
-                if word == "ning" or word == "véc":
-                    print(1)
-                # if "gia" in line:
-                #     print(1)
 
                 phonemes_string = " ".join(phonemes)
                 if phonemes_string not in vietdict:
