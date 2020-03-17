@@ -6135,7 +6135,7 @@ guậy notavailable 5 g w aa iz
 gúc 4 g u kc
 gục 5 g u kc
 
-gue 0 g w e
+gue completelynotavailable 0 g w e
 
 guét 4 g w e tc
 
@@ -20657,7 +20657,7 @@ vẹ notavailable 5 v e
 véc 4 v e kc
 vẹc completelynotavailable
 
-véch 4 v e kc
+# véch 4 v e kc
 
 vem completelynotavailable 0 v e mz
 vèm completelynotavailable 1 v e mz

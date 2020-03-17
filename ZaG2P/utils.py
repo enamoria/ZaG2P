@@ -14,7 +14,6 @@ from .constant import coda, nucleus, initial, coda_nucleus_and_semivowel, tone_f
 unvoiced_dict = {'b': 'b', 'k': 'k', 'd': 'd', 'đ': 'dd', 'g': 'g', 'p': 'p', 's': 's', 'x': 's', 't': 't', 'v': 'v'}
 map_phone_to_unvoice = {'6 b': 'bờ', '6 k': 'cờ', '6 tr': 'chờ', '6 d': 'dờ', '6 dd': 'đờ', '6 g': 'gờ', '6 l': 'lờ', '6 m': 'mờ', '6 n': 'nờ',
                         '6 p': 'pờ', '6 ph': 'phờ', '6 r': 'rờ', '6 s': 'xờ', '6 t': 'tờ', '6 th': 'thờ', '6 v': 'vờ'}
-
 # This is for 8tone dictionary
 # coda_nucleus_and_semivowel = ['ngmz', 'ie', 'uo', 'nhz', 'tz', 'pau', 'pz', 'nz', 'aX', 'WX', 'ngz', 'E', 'jz', 'OX', 'O', 'EX', 'W', 'wz', 'kcz', 'a', 'e', 'i', 'o', 'MW', 'u', 'w', 'kz', 'z', 'kpz', 'mz']
 
@@ -116,19 +115,30 @@ def read_dict(dictpath):
     with open(dictpath, "r") as f:
         for line in f.readlines():
             if line and line.strip() and line[0] != "#":
+                # Có nghĩa là có trong từ điển và được chấp nhận là 1 từ tiếng Việt, không phải chỉ đơn giản là ghép phụ âm đầu và vần.
+                # Ví dụ: đỵt phát âm giống địt nhưng sẽ không được coi là một từ tiếng Việt
+                is_real_vietnamese = True
+
+                if "notavailable" in line:
+                    is_real_vietnamese = False  # In new dict, words which are not originally in Vietnamese dictionary are noted as "notavailable"
+
+                line = line.strip().replace("notavailable", "").replace("completelynotavailable", "")
                 temp = line.strip().split(" ")
                 word, phonemes = temp[0], temp[1:]
 
+                if word == "ning" or word == "véc":
+                    print(1)
                 # if "gia" in line:
                 #     print(1)
 
                 phonemes_string = " ".join(phonemes)
                 if phonemes_string not in vietdict:
                     vietdict[phonemes_string] = word
-                elif (len(vietdict[phonemes_string]) < len(word) or "ing" not in word or word[0] == "x") and \
-                        not (phonemes_string[-1] == "i" and word[-1] == "y") and \
-                        not (word[0] == "k" and phonemes_string[1] not in "eéèẹẽẻêếềệễểiíìịĩỉyýỳỵỹỷ") and \
-                        not (word[0] == 'g' and word [1] == 'i'):
+
+                if (("ing" not in word or word[0] == "x") and
+                        not (phonemes_string[-1] == "i" and word[-1] == "y") and
+                        not (word[0] == "k" and phonemes_string[1] not in "eéèẹẽẻêếềệễểiíìịĩỉyýỳỵỹỷ") and
+                        not (word[0] == 'g' and word[1] == 'i')):  # and len(word) < len(vietdict[phonemes_string]):
                     vietdict[phonemes_string] = word
 
     return vietdict
