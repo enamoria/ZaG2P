@@ -11,7 +11,7 @@ Convert non-Vietnamese word to Vietnamese phonemes/syllables
 ## Usage
 
 ### Install
-`pip install https://github.com/enamoria/ZaG2P/zipball/paper_version --verbose`
+`pip install https://github.com/enamoria/ZaG2P/zipball/master --verbose`
 
 ### Example
 
