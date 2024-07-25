@@ -17,7 +17,7 @@ setup(
     url="https://github.com/enamoria/ZaG2P",
     install_requires=[
         # 'python-Levenshtein @ git+https://github.com/ztane/python-Levenshtein',
-        'torch==1.1.0', 'torchtext==0.3.1', 'dill', 'visdom', 'textdistance'
+        'torch==2.2.0', 'torchtext==0.3.1', 'dill', 'visdom', 'textdistance'
     ],
     packages=['ZaG2P'],
     include_package_data=True
